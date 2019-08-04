@@ -47,34 +47,36 @@ func (d *Dictionary) AvDictCount() int {
 	return int(C.av_dict_count((*C.struct_AVDictionary)(d)))
 }
 
-func (d *Dictionary) AvDictSet(key, value string, flags int) int {
+func (d *Dictionary) AvDictSet(key, value string, flags int) (*Dictionary, int) {
 	Ckey := C.CString(key)
 	defer C.free(unsafe.Pointer(Ckey))
 
 	Cvalue := C.CString(value)
 	defer C.free(unsafe.Pointer(Cvalue))
 
-	return int(C.av_dict_set(
+	res := int(C.av_dict_set(
 		(**C.struct_AVDictionary)(unsafe.Pointer(&d)),
 		Ckey,
 		Cvalue,
 		C.int(flags),
 	))
+	return d, res
 }
 
-func (d *Dictionary) AvDictSetInt(key string, value int64, flags int) int {
+func (d *Dictionary) AvDictSetInt(key string, value int64, flags int) (*Dictionary, int) {
 	Ckey := C.CString(key)
 	defer C.free(unsafe.Pointer(Ckey))
 
-	return int(C.av_dict_set_int(
+	res := int(C.av_dict_set_int(
 		(**C.struct_AVDictionary)(unsafe.Pointer(&d)),
 		Ckey,
 		C.int64_t(value),
 		C.int(flags),
 	))
+	return d, res
 }
 
-func (d *Dictionary) AvDictParseString(str, key_val_sep, pairs_sep string, flags int) int {
+func (d *Dictionary) AvDictParseString(str, key_val_sep, pairs_sep string, flags int) (*Dictionary, int) {
 	Cstr := C.CString(str)
 	defer C.free(unsafe.Pointer(Cstr))
 
@@ -84,21 +86,23 @@ func (d *Dictionary) AvDictParseString(str, key_val_sep, pairs_sep string, flags
 	Cpairs_sep := C.CString(pairs_sep)
 	defer C.free(unsafe.Pointer(Cpairs_sep))
 
-	return int(C.av_dict_parse_string(
+	res := int(C.av_dict_parse_string(
 		(**C.struct_AVDictionary)(unsafe.Pointer(&d)),
 		Cstr,
 		Ckey_val_sep,
 		Cpairs_sep,
 		C.int(flags),
 	))
+	return d, res
 }
 
-func (d *Dictionary) AvDictCopy(src *Dictionary, flags int) int {
-	return int(C.av_dict_copy(
+func (d *Dictionary) AvDictCopy(src *Dictionary, flags int) (*Dictionary, int) {
+	res := int(C.av_dict_copy(
 		(**C.struct_AVDictionary)(unsafe.Pointer(&d)),
 		(*C.struct_AVDictionary)(unsafe.Pointer(src)),
 		C.int(flags),
 	))
+	return d, res
 }
 
 func (d *Dictionary) AvDictFree() {
