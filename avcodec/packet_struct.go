@@ -10,8 +10,11 @@ import "C"
 func (p *Packet) Buf() *AvBufferRef {
 	return (*AvBufferRef)(p.buf)
 }
-func (p *Packet) Duration() int {
-	return int(p.duration)
+func (p *Packet) Duration() int64 {
+	return int64(p.duration)
+}
+func (p *Packet) SetDuration(duration int64) {
+	p.duration = C.int64_t(duration)
 }
 func (p *Packet) Flags() int {
 	return int(p.flags)
@@ -42,6 +45,9 @@ func (p *Packet) SetDts(dts int64) {
 }
 func (p *Packet) Pos() int64 {
 	return int64(p.pos)
+}
+func (p *Packet) SetPos(pos int64) {
+	p.pos = C.int64_t(pos)
 }
 func (p *Packet) Pts() int64 {
 	return int64(p.pts)
