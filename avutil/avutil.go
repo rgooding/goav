@@ -25,6 +25,15 @@ type (
 	File          C.FILE
 )
 
+const (
+	AV_ROUND_ZERO        int = 0
+	AV_ROUND_INF             = 1
+	AV_ROUND_DOWN            = 2
+	AV_ROUND_UP              = 3
+	AV_ROUND_NEAR_INF        = 5
+	AV_ROUND_PASS_MINMAX     = 8192
+)
+
 //Return the LIBAvUTIL_VERSION_INT constant.
 func AvutilVersion() uint {
 	return uint(C.avutil_version())
@@ -79,6 +88,10 @@ func AvRescaleQ(a int64, bq, cq Rational) int64 {
 	return (int64)(C.av_rescale_q((C.int64_t)(a), (C.struct_AVRational)(bq), (C.struct_AVRational)(cq)))
 }
 
-func AvRescaleRnd(a, b, c int64, rouding int) int64 {
-	return (int64)(C.av_rescale_rnd((C.int64_t)(a), (C.int64_t)(b), (C.int64_t)(c), (C.enum_AVRounding)(rouding)))
+func AvRescaleRnd(a, b, c int64, rounding int) int64 {
+	return (int64)(C.av_rescale_rnd((C.int64_t)(a), (C.int64_t)(b), (C.int64_t)(c), (C.enum_AVRounding)(rounding)))
+}
+
+func AvRescaleQRnd(a int64, bq, cq Rational, rounding int) int64 {
+	return (int64)(C.av_rescale_q_rnd((C.int64_t)(a), (C.struct_AVRational)(bq), (C.struct_AVRational)(cq), (C.enum_AVRounding)(rounding)))
 }
