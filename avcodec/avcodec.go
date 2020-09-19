@@ -81,6 +81,10 @@ func (cp *AvCodecParameters) AvCodecGetSampleRate() int {
 	return *((*int)(unsafe.Pointer(&cp.sample_rate)))
 }
 
+func (cp *AvCodecParameters) AvCodecParametersFree() {
+	C.avcodec_parameters_free((**C.struct_AVCodecParameters)(unsafe.Pointer(&cp)))
+}
+
 func (c *Codec) AvCodecGetMaxLowres() int {
 	return int(C.av_codec_get_max_lowres((*C.struct_AVCodec)(c)))
 }
@@ -284,4 +288,8 @@ func (f *Frame) Pts() int64 {
 
 func AvcodecParametersCopy(dst *AvCodecParameters, src *AvCodecParameters) int {
 	return int(C.avcodec_parameters_copy((*C.struct_AVCodecParameters)(unsafe.Pointer(dst)), (*C.struct_AVCodecParameters)(unsafe.Pointer(src))))
+}
+
+func AvcodecParametersAlloc() *AvCodecParameters {
+	return (*AvCodecParameters)(C.avcodec_parameters_alloc())
 }
