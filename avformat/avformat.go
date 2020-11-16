@@ -88,6 +88,18 @@ func (f *OutputFormat) AvOformatNext() *OutputFormat {
 	return (*OutputFormat)(C.av_oformat_next((*C.struct_AVOutputFormat)(f)))
 }
 
+func (f *OutputFormat) Name() string {
+	return C.GoString(f.name)
+}
+
+func (f *OutputFormat) Extensions() string {
+	return C.GoString(f.extensions)
+}
+
+func (f *OutputFormat) MimeType() string {
+	return C.GoString(f.mime_type)
+}
+
 //Return the LIBAvFORMAT_VERSION_INT constant.
 func AvformatVersion() uint {
 	return uint(C.avformat_version())
