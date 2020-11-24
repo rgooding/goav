@@ -197,6 +197,10 @@ func (ctxt *Context) MaxAnalyzeDuration2() int64 {
 	return int64(ctxt.max_analyze_duration)
 }
 
+func (ctxt *Context) SetMaxAnalyzeDuration(value int64) {
+	ctxt.max_analyze_duration = C.int64_t(value)
+}
+
 func (ctxt *Context) MaxInterleaveDelta() int64 {
 	return int64(ctxt.max_interleave_delta)
 }
