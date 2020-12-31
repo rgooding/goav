@@ -85,6 +85,18 @@ func (cp *AvCodecParameters) AvCodecParametersFree() {
 	C.avcodec_parameters_free((**C.struct_AVCodecParameters)(unsafe.Pointer(&cp)))
 }
 
+func (c *Codec) Name() string {
+	return C.GoString(c.name)
+}
+
+func (c *Codec) LongName() string {
+	return C.GoString(c.long_name)
+}
+
+func (c *Codec) Id() CodecId {
+	return *((*CodecId)(unsafe.Pointer(&c.id)))
+}
+
 func (c *Codec) AvCodecGetMaxLowres() int {
 	return int(C.av_codec_get_max_lowres((*C.struct_AVCodec)(c)))
 }
