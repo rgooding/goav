@@ -189,6 +189,14 @@ func (ctxt *Context) UseWallclockAsTimestamps() int {
 	return int(ctxt.use_wallclock_as_timestamps)
 }
 
+func (ctxt *Context) SetUseWallclockAsTimestamps(enabled bool) {
+	val := 0
+	if enabled {
+		val = 1
+	}
+	ctxt.use_wallclock_as_timestamps = C.int(val)
+}
+
 func (ctxt *Context) Duration() int64 {
 	return int64(ctxt.duration)
 }
