@@ -70,11 +70,6 @@ func (ctxt *AvIOContext) Close() error {
 	return avutil.ErrorFromCode(int(C.avio_close((*C.AVIOContext)(unsafe.Pointer(ctxt)))))
 }
 
-//If f is NULL, returns the first registered input format, if f is non-NULL, returns the next registered input format after f or NULL if f is the last one.
-func (f *InputFormat) AvIformatNext() *InputFormat {
-	return (*InputFormat)(C.av_iformat_next((*C.struct_AVInputFormat)(f)))
-}
-
 func (f *InputFormat) Name() string {
 	return C.GoString(f.name)
 }
@@ -89,11 +84,6 @@ func (f *InputFormat) Extensions() string {
 
 func (f *InputFormat) MimeType() string {
 	return C.GoString(f.mime_type)
-}
-
-//If f is NULL, returns the first registered output format, if f is non-NULL, returns the next registered output format after f or NULL if f is the last one.
-func (f *OutputFormat) AvOformatNext() *OutputFormat {
-	return (*OutputFormat)(C.av_oformat_next((*C.struct_AVOutputFormat)(f)))
 }
 
 func (f *OutputFormat) Name() string {
