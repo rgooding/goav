@@ -10,19 +10,6 @@ import (
 	"unsafe"
 )
 
-func (ctxt *Context) AvCodecGetPktTimebase() Rational {
-	return Rational(C.av_codec_get_pkt_timebase((*C.struct_AVCodecContext)(ctxt)))
-}
-
-// AvCodecGetPktTimebase2 returns the timebase rational number as numerator and denominator
-func (ctxt *Context) AvCodecGetPktTimebase2() Rational {
-	return ctxt.AvCodecGetPktTimebase()
-}
-
-func (ctxt *Context) AvCodecSetPktTimebase(r Rational) {
-	C.av_codec_set_pkt_timebase((*C.struct_AVCodecContext)(ctxt), (C.struct_AVRational)(r))
-}
-
 //Free the codec context and everything associated with it and write NULL to the provided pointer.
 func (ctxt *Context) AvcodecFreeContext() {
 	C.avcodec_free_context((**C.struct_AVCodecContext)(unsafe.Pointer(ctxt)))
@@ -63,29 +50,9 @@ func (ctxt *Context) AvcodecAlignDimensions2(w, h *int, l int) {
 	C.avcodec_align_dimensions2((*C.struct_AVCodecContext)(ctxt), (*C.int)(unsafe.Pointer(w)), (*C.int)(unsafe.Pointer(h)), (*C.int)(unsafe.Pointer(&l)))
 }
 
-//Decode the audio frame of size avpkt->size from avpkt->data into frame.
-func (ctxt *Context) AvcodecDecodeAudio4(f *Frame, g *int, a *Packet) int {
-	return int(C.avcodec_decode_audio4((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVFrame)(f), (*C.int)(unsafe.Pointer(g)), (*C.struct_AVPacket)(a)))
-}
-
-//Decode the video frame of size avpkt->size from avpkt->data into picture.
-func (ctxt *Context) AvcodecDecodeVideo2(p *Frame, g *int, a *Packet) int {
-	return int(C.avcodec_decode_video2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVFrame)(p), (*C.int)(unsafe.Pointer(g)), (*C.struct_AVPacket)(a)))
-}
-
 //Decode a subtitle message.
 func (ctxt *Context) AvcodecDecodeSubtitle2(s *AvSubtitle, g *int, a *Packet) int {
 	return int(C.avcodec_decode_subtitle2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVSubtitle)(s), (*C.int)(unsafe.Pointer(g)), (*C.struct_AVPacket)(a)))
-}
-
-//Encode a frame of audio.
-func (ctxt *Context) AvcodecEncodeAudio2(p *Packet, f *Frame, gp *int) int {
-	return int(C.avcodec_encode_audio2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVPacket)(p), (*C.struct_AVFrame)(f), (*C.int)(unsafe.Pointer(gp))))
-}
-
-//Encode a frame of video
-func (ctxt *Context) AvcodecEncodeVideo2(p *Packet, f *Frame, gp *int) int {
-	return int(C.avcodec_encode_video2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVPacket)(p), (*C.struct_AVFrame)(f), (*C.int)(unsafe.Pointer(gp))))
 }
 
 func (ctxt *Context) AvcodecEncodeSubtitle(b *uint8, bs int, s *AvSubtitle) int {
@@ -163,11 +130,11 @@ func (ctxt *Context) AvcodecReceiveFrame(frame *Frame) int {
 }
 
 func (ctxt *Context) AvcodecSendFrame(frame *Frame) int {
-       return (int)(C.avcodec_send_frame((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVFrame)(frame)))
+	return (int)(C.avcodec_send_frame((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVFrame)(frame)))
 }
 
 func (ctxt *Context) AvcodecReceivePacket(packet *Packet) int {
-       return (int)(C.avcodec_receive_packet((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVPacket)(packet)))
+	return (int)(C.avcodec_receive_packet((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVPacket)(packet)))
 }
 
 func (ctxt *Context) AvcodecParametersFromContext(dst *AvCodecParameters) int {

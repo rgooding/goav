@@ -97,11 +97,6 @@ func (c *Codec) Id() CodecId {
 	return *((*CodecId)(unsafe.Pointer(&c.id)))
 }
 
-// AvCodecNext If c is NULL, returns the first registered codec, if c is non-NULL,
-func (c *Codec) AvCodecNext() *Codec {
-	return (*Codec)(C.av_codec_next((*C.struct_AVCodec)(c)))
-}
-
 //Return a name for the specified profile, if available.
 func (c *Codec) AvGetProfileName(p int) string {
 	return C.GoString(C.av_get_profile_name((*C.struct_AVCodec)(c), C.int(p)))

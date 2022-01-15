@@ -41,18 +41,6 @@ func (p *Packet) AvGrowPacket(s int) int {
 //Initialize a reference-counted packet from av_malloc()ed data.
 func (p *Packet) AvPacketFromData(d *uint8, s int) int {
 	return int(C.av_packet_from_data((*C.struct_AVPacket)(p), (*C.uint8_t)(d), C.int(s)))
-
-}
-
-//Copy packet, including contents.
-func (p *Packet) AvCopyPacket(r *Packet) int {
-	return int(C.av_copy_packet((*C.struct_AVPacket)(p), (*C.struct_AVPacket)(r)))
-
-}
-
-//Copy packet side data.
-func (p *Packet) AvCopyPacketSideData(r *Packet) int {
-	return int(C.av_copy_packet_side_data((*C.struct_AVPacket)(p), (*C.struct_AVPacket)(r)))
 }
 
 //Free a packet.
