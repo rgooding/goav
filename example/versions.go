@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/rgooding/goav/avformat"
 	"log"
 
 	"github.com/rgooding/goav/avcodec"
@@ -17,5 +18,6 @@ func main() {
 	log.Printf("SWScale Version:\t%v", swscale.SwscaleVersion())
 	log.Printf("AvUtil Version:\t%v", avutil.AvutilVersion())
 	log.Printf("AvCodec Version:\t%v", avcodec.AvcodecVersion())
+	log.Printf("AvFormat Version:\t%v", avformat.AvformatVersion())
 	log.Printf("Resample Version:\t%v", swresample.SwresampleLicense())
 }
