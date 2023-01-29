@@ -10,9 +10,14 @@ package avutil
 //#cgo pkg-config: libavutil
 //#include <libavutil/error.h>
 //#include <stdlib.h>
-//static const char *error2string(int code) { return av_err2str(code); }
+//int avStrError(int errnum, char* errbuf, int errbuf_size) { return av_strerror(errnum, errbuf, errbuf_size); }
 import "C"
-import "errors"
+import (
+	"errors"
+	"fmt"
+	"strings"
+	"unsafe"
+)
 
 const (
 	AvErrorEOF    = -('E' | ('O' << 8) | ('F' << 16) | (' ' << 24))
@@ -20,9 +25,17 @@ const (
 )
 
 func ErrorFromCode(code int) error {
+	const bufSize = 64
+	myStr := strings.Repeat(" ", bufSize)
+	cStr := C.CString(myStr)
+	defer C.free(unsafe.Pointer(cStr))
+
 	if code >= 0 {
 		return nil
 	}
-
-	return errors.New(C.GoString(C.error2string(C.int(code))))
+	res := C.avStrError(C.int(code), cStr, bufSize)
+	if res < 0 {
+		return fmt.Errorf("unknown error %d", code)
+	}
+	return errors.New(C.GoString(cStr))
 }
