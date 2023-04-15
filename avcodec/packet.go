@@ -16,13 +16,6 @@ const (
 	AV_PKT_FLAG_DISCARD = int(C.AV_PKT_FLAG_DISCARD)
 )
 
-//Initialize optional fields of a packet with default values.
-func (p *Packet) AvInitPacket() {
-	C.av_init_packet((*C.struct_AVPacket)(p))
-	p.size = 0
-	p.data = nil
-}
-
 //Allocate the payload of a packet and initialize its fields with default values.
 func (p *Packet) AvNewPacket(s int) int {
 	return int(C.av_new_packet((*C.struct_AVPacket)(p), C.int(s)))
@@ -41,12 +34,6 @@ func (p *Packet) AvGrowPacket(s int) int {
 //Initialize a reference-counted packet from av_malloc()ed data.
 func (p *Packet) AvPacketFromData(d *uint8, s int) int {
 	return int(C.av_packet_from_data((*C.struct_AVPacket)(p), (*C.uint8_t)(d), C.int(s)))
-}
-
-//Free a packet.
-func (p *Packet) AvFreePacket() {
-	C.av_free_packet((*C.struct_AVPacket)(p))
-
 }
 
 //Allocate new information of a packet.
