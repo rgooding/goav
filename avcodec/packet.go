@@ -66,6 +66,12 @@ func (p *Packet) AvPacketUnref() {
 	C.av_packet_unref((*C.struct_AVPacket)(p))
 }
 
+//Free the packet, if the packet is reference counted, it will be unreferenced first.
+func (p *Packet) AvPacketFree() {
+	cp := (*C.struct_AVPacket)(p)
+	C.av_packet_free((**C.struct_AVPacket)(&cp))
+}
+
 //Move every field in src to dst and reset src.
 func (p *Packet) AvPacketMoveRef(s *Packet) {
 	C.av_packet_move_ref((*C.struct_AVPacket)(p), (*C.struct_AVPacket)(s))
