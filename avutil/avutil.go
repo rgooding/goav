@@ -69,12 +69,6 @@ func AvIntListLengthForSize(e uint, l int, t uint64) uint {
 	return uint(C.av_int_list_length_for_size(C.uint(e), unsafe.Pointer(&l), (C.uint64_t)(t)))
 }
 
-//Open a file using a UTF-8 filename.
-func AvFopenUtf8(p, m string) *File {
-	f := C.av_fopen_utf8(C.CString(p), C.CString(m))
-	return (*File)(f)
-}
-
 //Return the fractional representation of the internal time base.
 func AvGetTimeBaseQ() Rational {
 	return (Rational)(C.av_get_time_base_q())

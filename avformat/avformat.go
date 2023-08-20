@@ -139,7 +139,7 @@ func AvformatGetClass() *Class {
 
 //Get side information from stream.
 func (s *Stream) AvStreamGetSideData(t AvPacketSideDataType, z int) *uint8 {
-	return (*uint8)(C.av_stream_get_side_data((*C.struct_AVStream)(s), (C.enum_AVPacketSideDataType)(t), (*C.int)(unsafe.Pointer(&z))))
+	return (*uint8)(C.av_stream_get_side_data((*C.struct_AVStream)(s), (C.enum_AVPacketSideDataType)(t), (*C.ulong)(unsafe.Pointer(&z))))
 }
 
 //Allocate an Context for an output format.

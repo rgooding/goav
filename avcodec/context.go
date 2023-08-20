@@ -15,11 +15,6 @@ func (ctxt *Context) AvcodecFreeContext() {
 	C.avcodec_free_context((**C.struct_AVCodecContext)(unsafe.Pointer(&ctxt)))
 }
 
-//Set the fields of the given Context to default values corresponding to the given codec (defaults may be codec-dependent).
-func (ctxt *Context) AvcodecGetContextDefaults3(c *Codec) int {
-	return int(C.avcodec_get_context_defaults3((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVCodec)(c)))
-}
-
 //Initialize the Context to use the given Codec
 func (ctxt *Context) AvcodecOpen2(c *Codec, d **Dictionary) int {
 	return int(C.avcodec_open2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVCodec)(c), (**C.struct_AVDictionary)(unsafe.Pointer(d))))

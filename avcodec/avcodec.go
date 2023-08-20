@@ -157,12 +157,12 @@ func AvPacketAlloc() *Packet {
 
 //Pack a dictionary for use in side_data.
 func AvPacketPackDictionary(d *Dictionary, s *int) *uint8 {
-	return (*uint8)(C.av_packet_pack_dictionary((*C.struct_AVDictionary)(d), (*C.int)(unsafe.Pointer(s))))
+	return (*uint8)(C.av_packet_pack_dictionary((*C.struct_AVDictionary)(d), (*C.ulong)(unsafe.Pointer(s))))
 }
 
 //Unpack a dictionary from side_data.
 func AvPacketUnpackDictionary(d *uint8, s int, dt **Dictionary) int {
-	return int(C.av_packet_unpack_dictionary((*C.uint8_t)(d), C.int(s), (**C.struct_AVDictionary)(unsafe.Pointer(dt))))
+	return int(C.av_packet_unpack_dictionary((*C.uint8_t)(d), C.ulong(s), (**C.struct_AVDictionary)(unsafe.Pointer(dt))))
 }
 
 //Find a registered decoder with a matching codec ID.

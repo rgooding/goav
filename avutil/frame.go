@@ -87,7 +87,7 @@ func AvFrameGetPlaneBuffer(f *Frame, p int) *AvBufferRef {
 
 //Add a new side data to a frame.
 func AvFrameNewSideData(f *Frame, d AvFrameSideDataType, s int) *AvFrameSideData {
-	return (*AvFrameSideData)(C.av_frame_new_side_data((*C.struct_AVFrame)(unsafe.Pointer(f)), (C.enum_AVFrameSideDataType)(d), C.int(s)))
+	return (*AvFrameSideData)(C.av_frame_new_side_data((*C.struct_AVFrame)(unsafe.Pointer(f)), (C.enum_AVFrameSideDataType)(d), C.ulong(s)))
 }
 
 func AvFrameGetSideData(f *Frame, t AvFrameSideDataType) *AvFrameSideData {
