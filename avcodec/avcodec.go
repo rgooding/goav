@@ -179,16 +179,6 @@ func AvcodecFindDecoderByName(n string) *Codec {
 	return (*Codec)(C.avcodec_find_decoder_by_name(C.CString(n)))
 }
 
-//Converts AvChromaLocation to swscale x/y chroma position.
-func AvcodecEnumToChromaPos(x, y *int, l AvChromaLocation) int {
-	return int(C.avcodec_enum_to_chroma_pos((*C.int)(unsafe.Pointer(x)), (*C.int)(unsafe.Pointer(y)), (C.enum_AVChromaLocation)(l)))
-}
-
-//Converts swscale x/y chroma position to AvChromaLocation.
-func AvcodecChromaPosToEnum(x, y int) AvChromaLocation {
-	return (AvChromaLocation)(C.avcodec_chroma_pos_to_enum(C.int(x), C.int(y)))
-}
-
 //Find a registered encoder with a matching codec ID.
 func AvcodecFindEncoder(id CodecId) *Codec {
 	return (*Codec)(C.avcodec_find_encoder((C.enum_AVCodecID)(id)))

@@ -21,9 +21,3 @@ func (s *Stream) AvStreamGetParser() *CodecParserContext {
 // func (s *Stream) AvStreamSetRecommendedEncoderConfiguration( c string) {
 // 	C.av_stream_set_recommended_encoder_configuration((*C.struct_AVStream)(s), C.CString(c))
 // }
-
-//int64_t av_stream_get_end_pts (const Stream *st)
-//Returns the pts of the last muxed packet + its duration.
-func (s *Stream) AvStreamGetEndPts() int64 {
-	return int64(C.av_stream_get_end_pts((*C.struct_AVStream)(s)))
-}
