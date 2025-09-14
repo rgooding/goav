@@ -77,7 +77,6 @@ const (
 	AV_CODEC_ID_AVRP              = int(C.AV_CODEC_ID_AVRP)
 	AV_CODEC_ID_AVS               = int(C.AV_CODEC_ID_AVS)
 	AV_CODEC_ID_AVUI              = int(C.AV_CODEC_ID_AVUI)
-	AV_CODEC_ID_AYUV              = int(C.AV_CODEC_ID_AYUV)
 	AV_CODEC_ID_BETHSOFTVID       = int(C.AV_CODEC_ID_BETHSOFTVID)
 	AV_CODEC_ID_BFI               = int(C.AV_CODEC_ID_BFI)
 	AV_CODEC_ID_BINKAUDIO_DCT     = int(C.AV_CODEC_ID_BINKAUDIO_DCT)
