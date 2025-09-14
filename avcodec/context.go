@@ -20,7 +20,8 @@ func (ctxt *Context) AvcodecOpen2(c *Codec, d **Dictionary) int {
 	return int(C.avcodec_open2((*C.struct_AVCodecContext)(ctxt), (*C.struct_AVCodec)(c), (**C.struct_AVDictionary)(unsafe.Pointer(d))))
 }
 
-//Close a given Context and free all the data associated with it (but not the Context itself).
+// Close a given Context and free all the data associated with it (but not the Context itself).
+// Deprecated: use AvcodecFreeContext() instead.
 func (ctxt *Context) AvcodecClose() int {
 	return int(C.avcodec_close((*C.struct_AVCodecContext)(ctxt)))
 }
