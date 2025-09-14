@@ -39,10 +39,6 @@ func (ctxt *Context) BlockAlign() int {
 	return int(ctxt.block_align)
 }
 
-func (ctxt *Context) Channels() int {
-	return int(ctxt.channels)
-}
-
 func (ctxt *Context) CodedHeight() int {
 	return int(ctxt.coded_height)
 }
@@ -97,10 +93,6 @@ func (ctxt *Context) Flags() int {
 
 func (ctxt *Context) Flags2() int {
 	return int(ctxt.flags2)
-}
-
-func (ctxt *Context) FrameNumber() int {
-	return int(ctxt.frame_number)
 }
 
 func (ctxt *Context) FrameSize() int {
@@ -293,10 +285,6 @@ func (ctxt *Context) SkipBottom() int {
 
 func (ctxt *Context) SkipTop() int {
 	return int(ctxt.skip_top)
-}
-
-func (ctxt *Context) SliceCount() int {
-	return int(ctxt.slice_count)
 }
 
 func (ctxt *Context) SliceFlags() int {

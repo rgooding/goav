@@ -173,10 +173,6 @@ func (ctxt *Context) StrictStdCompliance() int {
 	return int(ctxt.strict_std_compliance)
 }
 
-func (ctxt *Context) TsId() int {
-	return int(ctxt.ts_id)
-}
-
 func (ctxt *Context) UseWallclockAsTimestamps() int {
 	return int(ctxt.use_wallclock_as_timestamps)
 }
